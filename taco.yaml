@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taco-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: taco-app
+  template:
+    metadata:
+      labels:
+        app: taco-app
+    spec:
+      containers:
+      - name: taco-container
+        image: biighunter/tacoshop:v0.5
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7070
+      containers:
+      - name: private-reg-container-name
+        image: biighunter/tacoshop:v0.5
+      imagePullSecrets:
+      - name: regcred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taco-service
+spec:
+  selector:
+    app: taco-app
+  ports:
+  - protocol: TCP
+    port: 7070
+    targetPort: 7070
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: taco-ingress
+spec:
+  rules:
+  - host: k8s.shomamamama.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: taco-service
+            port:
+              number: 7070
