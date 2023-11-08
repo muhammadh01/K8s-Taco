@@ -28,7 +28,7 @@ jobs:
     - name: Set tag version as an output
       run: echo "TAG_VERSION=${{ steps.tag_version.outputs.tag }}" >> $GITHUB_ENV
 
-    - name: Login to Harbor
+    - name: Login to DockerHUB
       run: |
         docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
 
@@ -38,13 +38,13 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USER }}/tacoshop:${version} .
           docker tag ${{ secrets.DOCKER_USER }}/tacoshop:${version} harbor.shomamamama.com/hohohoo/tacoshop:latest
   
-    - name: Push Image to Harbor
+    - name: Push Image to DockerHUB
       run: |
           version=$TAG_VERSION
           docker push ${{ secrets.DOCKER_USER }}/tacoshop:${version}
           docker push ${{ secrets.DOCKER_USER }}/tacoshop
 
-    - name: Deploy to Server
+    - name: Deploy to K8s Server
       uses: appleboy/ssh-action@master
       with:
         host: 146.190.26.15
