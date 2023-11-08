@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
       - name: taco-container
-        image: biighunter/tacoshop:v0.5
+        image: biighunter/tacoshop:${TACO_VERSION}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 7070
       containers:
       - name: private-reg-container-name
-        image: biighunter/tacoshop:v0.5
+        image: biighunter/tacoshop:${TACO_VERSION}
       imagePullSecrets:
       - name: regcred
 
