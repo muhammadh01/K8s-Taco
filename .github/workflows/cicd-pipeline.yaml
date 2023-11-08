@@ -59,7 +59,6 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
           docker pull ${{ secrets.DOCKER_USER }}/taco:${TACO_VERSION}          
           kubectl apply -f taco.yaml
-          cd ../
           git pull
           git add .
           git commit -m "Update"
