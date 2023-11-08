@@ -36,7 +36,7 @@ jobs:
       run: |
           version=$TAG_VERSION
           docker build -t ${{ secrets.DOCKER_USER }}/tacoshop:${version} .
-          docker tag ${{ secrets.DOCKER_USER }}/tacoshop:${version} harbor.shomamamama.com/hohohoo/tacoshop:latest
+          docker tag ${{ secrets.DOCKER_USER }}/tacoshop:${version} ${{ secrets.DOCKER_USER }}/tacoshop:latest
   
     - name: Push Image to DockerHUB
       run: |
