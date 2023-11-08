@@ -53,7 +53,7 @@ jobs:
         port: 22
         script: |
           su - mamad
-          cd ./K8s-Taco/
+          cd /home/mamad/K8s-Taco
           version=$TAG_VERSION
           echo "TACO_VERSION=${version}" >> .env
           docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
