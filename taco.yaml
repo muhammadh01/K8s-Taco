@@ -30,6 +30,9 @@ kind: Service
 metadata:
   name: taco-service
 spec:
+  type: ClusterIP
+  externalIPs:
+  - 146.190.26.15
   selector:
     app: taco-app
   ports:
@@ -43,8 +46,12 @@ kind: Ingress
 metadata:
   name: taco-ingress
 spec:
+  tls:
+  - hosts:
+    - k8staco.duckdns.org
+    secretName: example-app-tls
   rules:
-  - host: k8s.shomamamama.com
+  - host: k8staco.duckdns.org
     http:
       paths:
       - path: /
