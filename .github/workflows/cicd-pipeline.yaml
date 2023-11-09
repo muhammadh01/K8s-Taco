@@ -52,12 +52,12 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
+          docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
+          docker pull biighunter/tacoshop:${{ steps.tag_version.outputs.tag }}
           su - mamad
           cd /home/mamad/K8s-Taco
           echo "TACO_VERSION=${{ steps.tag_version.outputs.tag }}" >> .env
-          cat .env
-          docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
-          docker pull biighunter/tacoshop:${TACO_VERSION}       
+          cat .env        
           kubectl apply -f taco.yaml
           rm -rf .env
           
