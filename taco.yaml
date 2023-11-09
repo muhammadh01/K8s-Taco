@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: taco-container
-        image: biighunter/tacoshop:${TACO_VERSION}
+        image: biighunter/tacoshop:v0.10
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 7070
