@@ -58,6 +58,4 @@ jobs:
           cat .env
           docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
           docker pull ${{ secrets.DOCKER_USER }}/tacoshop:${TACO_VERSION}       
-          kubectl apply -f taco.yaml
-          rm -rf .env
-          
+          kubectl apply -f taco.yaml          
