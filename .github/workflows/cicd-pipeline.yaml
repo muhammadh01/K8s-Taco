@@ -54,6 +54,7 @@ jobs:
         script: |
           su - mamad
           cd /home/mamad/K8s-Taco
+          rm -rf
           echo "TACO_VERSION=${{ steps.tag_version.outputs.tag }}" >> .env
           cat .env
           docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
