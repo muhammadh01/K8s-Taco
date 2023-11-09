@@ -56,6 +56,7 @@ jobs:
           cd /home/mamad/K8s-Taco
           version=$TAG_VERSION
           echo "TACO_VERSION=${version}" >> .env
+          cat .env
           docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
           docker pull ${{ secrets.DOCKER_USER }}/taco:${TACO_VERSION}          
           kubectl apply -f taco.yaml
