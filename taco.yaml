@@ -31,8 +31,6 @@ metadata:
   name: taco-service
 spec:
   type: ClusterIP
-  externalIPs:
-  - 146.190.26.15
   selector:
     app: taco-app
   ports:
