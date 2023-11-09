@@ -57,7 +57,7 @@ jobs:
           echo "TACO_VERSION=${{ steps.tag_version.outputs.tag }}" >> .env
           cat .env
           docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
-          docker pull ${{ secrets.DOCKER_USER }}/tacoshop:${TACO_VERSION}       
+          docker pull biighunter/tacoshop:${TACO_VERSION}       
           kubectl apply -f taco.yaml
           rm -rf .env
           
