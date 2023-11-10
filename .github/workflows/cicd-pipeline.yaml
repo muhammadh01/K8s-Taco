@@ -70,4 +70,3 @@ jobs:
           cat .env
           kubectl delete -f taco.yaml
           kubectl apply -f taco.yaml
-          rm -rf .env

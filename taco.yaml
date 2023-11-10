@@ -18,7 +18,7 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 7070
-      # containers:
+      containers:
       - name: private-reg-container-name
         image: biighunter/tacoshop:${TACO_VERSION}
       imagePullSecrets:
