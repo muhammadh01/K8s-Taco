@@ -64,6 +64,9 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
+          cd /home/mamad/K8s-Taco
+          rm -rf .env
+          chmod 777 -R .env
           su - mamad
           cd /home/mamad/K8s-Taco
           echo "TACO_VERSION=${{ steps.tag_version.outputs.tag }}" >> .env
