@@ -66,10 +66,10 @@ jobs:
         script: |
           cd /home/mamad/K8s-Taco
           rm -rf .env
+          echo "TACO_VERSION=${{ steps.tag_version.outputs.tag }}" >> .env
           chmod 777 -R .env
           su - mamad
           cd /home/mamad/K8s-Taco
-          echo "TACO_VERSION=${{ steps.tag_version.outputs.tag }}" >> .env
           cat .env
           kubectl delete -f taco.yaml
           kubectl apply -f taco.yaml
