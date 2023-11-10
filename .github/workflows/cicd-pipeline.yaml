@@ -52,6 +52,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
+          su - mamad
           docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
           docker pull biighunter/tacoshop:${{ steps.tag_version.outputs.tag }}
 
