@@ -66,4 +66,4 @@ jobs:
           cd /root/K8s-Taco
           echo "TACO_VERSION=${{ steps.tag_version.outputs.tag }}" >> .env
           cat .env
-          kubectl apply -f taco.yaml
+          kubectl delete -f taco.yaml
