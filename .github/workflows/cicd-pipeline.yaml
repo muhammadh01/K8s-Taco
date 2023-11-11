@@ -64,6 +64,7 @@ jobs:
         port: 22
         script: |
           cd /root/K8s-Taco
+          rm -rf .env
           echo "TACO_VERSION=${{ steps.tag_version.outputs.tag }}" >> .env
           cat .env
           kubectl delete -f taco.yaml
