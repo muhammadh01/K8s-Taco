@@ -52,7 +52,6 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          su - mamad
           docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
           docker pull biighunter/tacoshop:${{ steps.tag_version.outputs.tag }}
 
@@ -64,12 +63,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          cd /home/mamad/K8s-Taco
-          rm -rf .env
+          cd /root/K8s-Taco
           echo "TACO_VERSION=${{ steps.tag_version.outputs.tag }}" >> .env
-          chmod 777 -R .env
-          su - mamad
-          cd /home/mamad/K8s-Taco
           cat .env
-          kubectl delete -f taco.yaml
           kubectl apply -f taco.yaml
