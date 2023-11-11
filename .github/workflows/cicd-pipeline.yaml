@@ -32,28 +32,28 @@ jobs:
       run: |
         docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
 
-    # - name: Build and Tag Docker Image
-    #   run: |
-    #       version=$TAG_VERSION
-    #       docker build -t ${{ secrets.DOCKER_USER }}/tacoshop:${version} .
-    #       docker tag ${{ secrets.DOCKER_USER }}/tacoshop:${version} ${{ secrets.DOCKER_USER }}/tacoshop:latest
+    - name: Build and Tag Docker Image
+      run: |
+          version=$TAG_VERSION
+          docker build -t ${{ secrets.DOCKER_USER }}/tacoshop:${version} .
+          docker tag ${{ secrets.DOCKER_USER }}/tacoshop:${version} ${{ secrets.DOCKER_USER }}/tacoshop:latest
   
-    # - name: Push Image to DockerHUB
-    #   run: |
-    #       version=$TAG_VERSION
-    #       docker push ${{ secrets.DOCKER_USER }}/tacoshop:${version}
-    #     #   docker push ${{ secrets.DOCKER_USER }}/tacoshop
+    - name: Push Image to DockerHUB
+      run: |
+          version=$TAG_VERSION
+          docker push ${{ secrets.DOCKER_USER }}/tacoshop:${version}
+        #   docker push ${{ secrets.DOCKER_USER }}/tacoshop
     
-    # - name: Pull New Image to Server
-    #   uses: appleboy/ssh-action@master
-    #   with:
-    #     host: 146.190.26.15
-    #     username: "root"
-    #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-    #     port: 22
-    #     script: |
-    #       docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
-    #       docker pull biighunter/tacoshop:${{ steps.tag_version.outputs.tag }}
+    - name: Pull New Image to Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: 146.190.26.15
+        username: "root"
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          docker login -u ${{ secrets.DOCKER_USER }} --password-stdin <<< ${{ secrets.DOCKER_PASS }}
+          docker pull biighunter/tacoshop:${{ steps.tag_version.outputs.tag }}
 
     - name: Add The New Tag to .env For Taco.yaml File
       uses: appleboy/ssh-action@master
